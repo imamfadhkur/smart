@@ -8,6 +8,8 @@
 </head>
 <body>
 
+test
+
 
 <!-- yang registrasi hanya admin, pasien tidak boleh registrasi sendiri -->
 
