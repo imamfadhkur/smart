@@ -33,7 +33,7 @@ include "koneksi.php";
 
 if (isset($_POST['submit_login_pasien'])) {
 
-    $query=$dbc->prepare("SELECT * FROM pasien WHERE ID_PASIEN = :id AND PASWORD = SHA2(:password,0)");
+    $query=$dbc->prepare("SELECT * FROM pasien WHERE ID_PASIEN = :id AND PASSWORD = SHA2(:password,0)");
     $query->bindValue(':id', $_POST['username']);
     $query->bindValue(':password', $_POST['password']);
 	$query->execute();

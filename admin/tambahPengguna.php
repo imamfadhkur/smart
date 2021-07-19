@@ -18,12 +18,16 @@ if (!$_SESSION['admin']) {
     <title>admin</title>
 </head>
 <body>
-    <div>Selamat datang admin <?php echo "{$_SESSION['admin']}" ?>, semangat untuk hari ini.</div>
+    <div>Hallo admin <?php echo "{$_SESSION['admin']}" ?>, pilih pengguna baru yang ingin ditambahkan ya</div>
 
-    <a href="tambahPengguna.php">tambah pengguna baru</a>
-    <br>
-    <a href="antrian.php">mulai antrian</a>
-    <br>
+    <form action="registrasi.php" method="POST">
+        <input type="submit" value="tambah akun pasien" name="pasien">
+        <input type="submit" value="tambah akun admin" name="admin">
+        <input type="submit" value="tambah akun dokter" name="dokter">
+    </form>
+
+    <br><br>
+
     <a href="logout.php">logout</a>
 </body>
 </html>

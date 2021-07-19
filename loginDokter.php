@@ -32,7 +32,7 @@ if (isset($_POST['dokter'])) {
 
 if (isset($_POST['submit_login_dokter'])) {
 
-    $query=$dbc->prepare("SELECT * FROM dokter WHERE ID_DOKTER = :id AND PASWORD = SHA2(:password,0)");
+    $query=$dbc->prepare("SELECT * FROM dokter WHERE ID_DOKTER = :id AND PASSWORD = SHA2(:password,0)");
     $query->bindValue(':id', $_POST['username']);
     $query->bindValue(':password', $_POST['password']);
 	$query->execute();
