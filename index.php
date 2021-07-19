@@ -12,19 +12,34 @@
     <h1>Selamat Datang di SMART</h1>
     <p>Sistem Antrian Terapi</p>
 
-    <h3>Silahkan Login</h3>
+    <?php
+
+    if (isset($_POST['dokter'])) {
+            include 'loginDokter.php';
+    }
+    
+    elseif (isset($_POST['pasien'])) {
+        include 'loginPasien.php';
+    }
+    
+    elseif (isset($_POST['admin'])) {
+        include 'loginAdmin.php';
+    }
+
+    else {
+        ?>
 
     <form action="index.php" method="POST">
-        <input type="submit" value="pasien" name="pasien">
-        <input type="submit" value="admin" name="admin">
+        <h3>Silahkan Login Sesuai Akun Anda</h3>
+        <input type="submit" value="pasien" name="pasien"> <br>
+        <input type="submit" value="admin" name="admin"> <br>
         <input type="submit" value="dokter" name="dokter">
     </form>
 
-    <br>
-    
-    <?php
-        include 'login.php';
+        <?php
+    }
+
     ?>
-    
+
 </body>
 </html>
