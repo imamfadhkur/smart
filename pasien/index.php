@@ -2,6 +2,7 @@
 <?php
 
     session_start();
+    $_SESSION['pesan_ubah_password'] = "";
     if (!$_SESSION['pasien']) {
         header("Location: ../index.php");
         exit();
@@ -20,7 +21,14 @@
 <body>
     <h1>Hallo pasien <?php echo "{$_SESSION['pasien']}" ?></h1>
 
-    <a href="daftarAntrian.php">daftar antrian terapi</a>
+    <?php
+    if (isset($_SESSION['mengantri'])) {
+        echo "<a href=\"daftarAntrian.php\">Kembali ke antrian</a>";
+    }
+    else {
+        echo "<a href=\"daftarAntrian.php\">daftar antrian terapi</a>";
+    }
+    ?>
     <a href="profil.php">profil</a>
     <a href="riwayatTerapi.php">riwayat terapi</a>
     <a href="logout.php">logout</a>

@@ -22,7 +22,14 @@ if (!$_SESSION['admin']) {
 
     <a href="tambahPengguna.php">tambah pengguna baru</a>
     <br>
-    <a href="antrian.php">mulai antrian</a>
+    <?php
+    if (isset($_SESSION['antrian'])) {
+        echo "<a href=\"antrian.php\">kembali ke antrian</a>";
+    }
+    else {
+        echo "<a href=\"antrian.php\">mulai antrian</a>";
+    }
+    ?>
     <br>
     <a href="logout.php">logout</a>
 </body>

@@ -28,6 +28,7 @@ if (!$_SESSION['admin']) {
 
         if (isset($_POST['ya'])) {
             unset($_SESSION['admin']);
+            unset($_SESSION['antrian']);
             header('Location: ../index.php');
             exit();
         }
