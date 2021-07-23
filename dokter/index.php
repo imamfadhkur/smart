@@ -18,7 +18,10 @@
     <title>pasien</title>
 </head>
 <body>
-    <h1>Selamat datang <?php echo "{$_SESSION['dokter']}" ?></h1>
+    <h1>Selamat datang dokter <?php echo "{$_SESSION['dokter']}" ?></h1>
+    <a href="dataPasien.php">lihat data pasien</a> <br>
+    <a href="jadwalTerapi.php">lihat jadwal terapi</a> <br>
+    <a href="riwayatPasien.php">lihat riwayat pasien</a> <br>
     <a href="logout.php">logout</a>
 </body>
 </html>

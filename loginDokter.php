@@ -13,7 +13,6 @@
 
 include "koneksi.php";
 
-if (isset($_POST['dokter'])) {
     ?>
 
 <form action="loginDokter.php" method="POST">
@@ -28,7 +27,6 @@ if (isset($_POST['dokter'])) {
     </form>
 
     <?php
-}
 
 if (isset($_POST['submit_login_dokter'])) {
 

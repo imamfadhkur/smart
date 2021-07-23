@@ -20,11 +20,9 @@ if (!$_SESSION['admin']) {
 <body>
     <div>Hallo admin <?php echo "{$_SESSION['admin']}" ?>, pilih pengguna baru yang ingin ditambahkan ya</div>
 
-    <form action="registrasi.php" method="POST">
-        <input type="submit" value="tambah akun pasien" name="pasien">
-        <input type="submit" value="tambah akun admin" name="admin">
-        <input type="submit" value="tambah akun dokter" name="dokter">
-    </form>
+    <a href="tambahDataPasien.php">tambah data pasien</a> <br>
+    <a href="tambahDataAdmin.php">tambah data admin</a> <br>
+    <a href="tambahDataDokter.php">tambah data dokter</a>
 
     <br><br>
 

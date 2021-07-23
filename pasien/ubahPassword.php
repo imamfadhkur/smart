@@ -69,12 +69,36 @@ function cekKesamaan($pw1, $pw2){
     return $hasil;
 }
 
+function cekValidasiPw($pw2){
+    $error = true;
+    $alpha = "/[a-zA-Z]/"; //Alfabet
+		$num = "/[0-9]/"; //Numerik
+		$antisimbol = "/^[a-zA-Z0-9]+$/"; //Selain karakter yang ada pada pattern ini akan invalid
+		if(!(preg_match($alpha, $pw2) && preg_match($num, $pw2) && preg_match($antisimbol, $pw2)) || strlen($pw2) < 8){
+			$error = false; //Password harus mengandung alfanumerik tanpa simbol satupun dan minimal panjang harus 8 karakter
+		}
+        return $error;
+}
+
 if (isset($_POST['submitUpdate'])) {
 
     $cekPass = cekPW($_POST['password'],$dbc,$_SESSION['id_pasien']);
     $cekKesamaan = cekKesamaan($_POST['passwordBaru'], $_POST['konfirmPassword']);
+    $cekValidasi = cekValidasiPw($_POST['passwordBaru']);
     
-    if ($cekPass == true && $cekKesamaan == true) {
+    if ($cekPass == false) {
+        $_SESSION['pesan_ubah_password'] = "Password lama anda salah.";
+    }
+    
+    elseif($cekValidasi == false) {
+        $_SESSION['pesan_ubah_password'] = "Password harus alfanumerik dengan panjang delapan karakter atau lebih";
+    }
+    
+    elseif($cekKesamaan == false) {
+        $_SESSION['pesan_ubah_password'] = "Password anda tidak sama.";
+    }
+
+    elseif ($cekPass == true && $cekKesamaan == true && $cekValidasi && $cekValidasi == true) {
         $query = $dbc->prepare("UPDATE pasien SET PASSWORD = SHA2(:password,0) WHERE pasien.ID_PASIEN = :id_asal");
         $query->bindValue(':id_asal', $_SESSION['id_pasien']);
         $query->bindValue(':password', $_POST['passwordBaru']);
@@ -85,16 +109,8 @@ if (isset($_POST['submitUpdate'])) {
         exit();
     }
     
-    elseif($cekPass == true && $cekKesamaan == false) {
-        $_SESSION['pesan_ubah_password'] = "Password anda tidak sama.";
-    }
-    
-    elseif($cekPass == false && $cekKesamaan == true) {
-        $_SESSION['pesan_ubah_password'] = "Password lama anda salah.";
-    }
-    
     else {
-        $_SESSION['pesan_ubah_password'] = "Password anda tidak sama atau password lama anda salah.";
+        $_SESSION['pesan_ubah_password'] = "Kesalahan.";
     }
 
 }
@@ -106,15 +122,15 @@ if (isset($_POST['submitUpdate'])) {
     <table>
         <tr>
             <td>Password lama</td>
-            <td><input type="password" name="password" id="password"></td>
+            <td><input type="password" name="password" id="password" required></td>
         </tr>
         <tr>
             <td>Password baru</td>
-            <td><input type="password" name="passwordBaru" id="passwordBaru"></td>
+            <td><input type="password" name="passwordBaru" id="passwordBaru" required></td>
         </tr>
         <tr>
             <td>Konfirmasi password baru</td>
-            <td><input type="password" name="konfirmPassword" id="konfirmPassword"></td>
+            <td><input type="password" name="konfirmPassword" id="konfirmPassword" required></td>
         </tr>
         <tr>
             <td></td>
